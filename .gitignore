@@ -10,3 +10,33 @@ buildNumber.properties
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
+api/.settings/org.eclipse.jdt.core.prefs
+api/.project
+api/.classpath
+.settings/org.eclipse.core.resources.prefs
+.project
+apibinding/.classpath
+apibinding/.settings/org.eclipse.jdt.core.prefs
+compatibility/.classpath
+compatibility/.settings/org.eclipse.jdt.core.prefs
+contract/.classpath
+contract/.settings/org.eclipse.jdt.core.prefs
+distribution/.classpath
+distribution/.settings/org.eclipse.jdt.core.prefs
+fixers/.classpath
+fixers/.settings/org.eclipse.jdt.core.prefs
+impl/.classpath
+impl/.settings/org.eclipse.jdt.core.prefs
+oboformat/.classpath
+oboformat/.settings/org.eclipse.jdt.core.prefs
+osgidistribution/.classpath
+osgidistribution/.settings/org.eclipse.jdt.core.prefs
+osgidistribution/felix-cache/
+parsers/.classpath
+parsers/.settings/org.eclipse.jdt.core.prefs
+rio/.classpath
+rio/.settings/org.eclipse.jdt.core.prefs
+tools/.classpath
+tools/.settings/org.eclipse.jdt.core.prefs
+osgidistribution/.DS_Store
+.DS_Store
