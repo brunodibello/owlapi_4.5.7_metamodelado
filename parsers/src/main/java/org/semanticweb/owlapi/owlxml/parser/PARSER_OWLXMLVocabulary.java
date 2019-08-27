@@ -70,6 +70,7 @@ import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.FACET_RESTRICTION;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.FUNCTIONAL_DATA_PROPERTY;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.FUNCTIONAL_OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.HAS_KEY;
+import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.METAMODELLING;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.HEAD;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.IMPORT;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.INVERSE_FUNCTIONAL_OBJECT_PROPERTY;
@@ -122,6 +123,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -244,6 +246,7 @@ enum PARSER_OWLXMLVocabulary implements HasIRI {
     /** NEGATIVE_OBJECT_PROPERTY_ASSERTION  */  PARSER_NEGATIVE_OBJECT_PROPERTY_ASSERTION  (NEGATIVE_OBJECT_PROPERTY_ASSERTION  ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLNegativeObjectPropertyAssertionAxiomElementHandler(             handler); } },
     /** NEGATIVE_DATA_PROPERTY_ASSERTION    */  PARSER_NEGATIVE_DATA_PROPERTY_ASSERTION    (NEGATIVE_DATA_PROPERTY_ASSERTION    ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLNegativeDataPropertyAssertionAxiomElementHandler(             handler); } },
     /** HAS_KEY                             */  PARSER_HAS_KEY                             (HAS_KEY                             ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLHasKeyElementHandler(handler); } },
+    /** METAMODELLING                       */  PARSER_METAMODELLING                       (METAMODELLING                       ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLMetamodellingAxiomElementHandler(handler); } },
     /** DECLARATION                         */  PARSER_DECLARATION                         (DECLARATION                         ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLDeclarationAxiomElementHandler(handler); } },
     /** ANNOTATION_ASSERTION                */  PARSER_ANNOTATION_ASSERTION                (ANNOTATION_ASSERTION                ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLAnnotationAssertionElementHandler(handler); } },
     /** ANNOTATION_PROPERTY_DOMAIN          */  PARSER_ANNOTATION_PROPERTY_DOMAIN          (ANNOTATION_PROPERTY_DOMAIN          ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLAnnotationPropertyDomainElementHandler(handler); } },
@@ -1480,6 +1483,42 @@ class OWLClassAssertionAxiomElementHandler extends AbstractOWLAxiomElementHandle
         return df.getOWLClassAssertionAxiom(verifyNotNull(classExpression),
             verifyNotNull(individual), annotations);
     }
+}
+
+class OWLMetamodellingAxiomElementHandler extends AbstractOWLAxiomElementHandler {
+
+    private OWLClassExpression modelClass;
+    private OWLIndividual metaIndividual;
+
+    OWLMetamodellingAxiomElementHandler(@Nonnull OWLXMLParserHandler handler) {
+        super(handler);
+    }
+
+    @Override
+   	public void startElement(String name) throws OWLXMLParserException {
+       super.startElement(name);
+       modelClass = null;
+       metaIndividual = null;
+    }
+
+   @Override
+   public void handleChild(AbstractClassExpressionElementHandler handler) {
+	   modelClass = handler.getOWLObject();
+   }
+
+   @Override
+   public void handleChild(OWLIndividualElementHandler handler) throws OWLXMLParserException {
+	   metaIndividual = handler.getOWLObject();
+   }
+
+   @Override
+   OWLAxiom createAxiom() {
+		ensureNotNull(metaIndividual, "individual element");
+		ensureNotNull(modelClass, "classExpression kind element");
+		assert modelClass != null;
+		assert metaIndividual != null;
+		return df.getOWLMetamodellingAxiom(verifyNotNull(modelClass), verifyNotNull(metaIndividual), annotations);
+	}
 }
 
 

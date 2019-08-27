@@ -33,6 +33,7 @@ import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
 import org.semanticweb.owlapi.model.OWLDisjointUnionAxiom;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLHasKeyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectComplementOf;
 import org.semanticweb.owlapi.model.OWLObjectExactCardinality;
@@ -269,6 +270,14 @@ public class OWLClassExpressionCollector extends
     public Set<OWLClassExpression> visit(OWLHasKeyAxiom axiom) {
         return axiom.getClassExpression().accept(this);
     }
+    
+	@Override
+	public Set<OWLClassExpression> visit(OWLMetamodellingAxiom axiom) {
+		Set<OWLClassExpression> result = new HashSet<>();
+        result.addAll(axiom.getModelClass().accept(this));
+        result.addAll(axiom.getMetamodelIndividual().accept(this));
+        return result;
+	}
 
     @Override
     public Set<OWLClassExpression> visit(SWRLRule rule) {

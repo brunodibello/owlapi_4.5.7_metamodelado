@@ -182,4 +182,11 @@ public class MaximumModalDepthFinder extends OWLObjectVisitorExAdapter<Integer> 
         }
         return i(max);
     }
+    
+	@Override
+	public Integer visit(OWLMetamodellingAxiom axiom) {
+        int modelClassModalDepth = axiom.getModelClass().accept(this).intValue();
+        int metamodelModalDepth = axiom.getMetamodelIndividual().accept(this).intValue();
+        return Integer.valueOf(Math.max(modelClassModalDepth, metamodelModalDepth));
+	}
 }

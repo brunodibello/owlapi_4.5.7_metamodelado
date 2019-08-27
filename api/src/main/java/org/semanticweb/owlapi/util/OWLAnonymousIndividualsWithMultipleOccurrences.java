@@ -284,6 +284,13 @@ public class OWLAnonymousIndividualsWithMultipleOccurrences implements OWLObject
         }
         processAxiomAnnotations(axiom);
     }
+    
+    @Override
+    public void visit(OWLMetamodellingAxiom axiom) {
+        axiom.getModelClass().accept(this);
+        axiom.getMetamodelIndividual().accept(this);
+        processAxiomAnnotations(axiom);
+    }
 
     // //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //

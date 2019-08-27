@@ -15,7 +15,7 @@
 	</properties>
 
 	<dependencies>
-		<dependency><groupId>${project.groupId}</groupId><artifactId>owlapi-distribution</artifactId><version>${project.version}</version></dependency>
+		<dependency><groupId>${project.groupId}</groupId><artifactId>owlapi-distribution-metamodelling</artifactId><version>${project.version}</version></dependency>
 	</dependencies>
 
 	<build>
@@ -33,7 +33,7 @@
 						<Implementation-Version>${project.version}.${maven.build.timestamp}</Implementation-Version>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
-						<Embed-Dependency>owlapi-distribution,!groupId=${project.groupId},!scope=test,!slf4j-simple,*</Embed-Dependency>
+						<Embed-Dependency>owlapi-distribution-metamodelling,!groupId=${project.groupId},!scope=test,!slf4j-simple,*</Embed-Dependency>
 						<Embed-Directory>lib</Embed-Directory>
 						<Embed-Transitive>true</Embed-Transitive>
 						<Export-Package>*</Export-Package>

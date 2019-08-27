@@ -341,6 +341,17 @@ public class OWLImmutableOntologyImpl extends OWLAxiomIndexImpl
         }
         return toReturn;
     }
+    
+    @Nonnull
+    @Override
+    public Set<OWLAxiom> getMBoxAxioms(Imports includeImportsClosure) {
+        Set<OWLAxiom> toReturn = new HashSet<>();
+        for (AxiomType<?> type : AxiomType.MBoxAxiomTypes) {
+            assert type != null;
+            toReturn.addAll(getAxioms(type, includeImportsClosure));
+        }
+        return toReturn;
+    }
 
     @Nonnull
     @Override

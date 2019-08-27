@@ -484,6 +484,15 @@ public class DLSyntaxObjectRenderer extends OWLObjectVisitorAdapter implements O
         second.accept(this);
         write(INVERSE);
     }
+    
+    @Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		axiom.getMetamodelIndividual().accept(this);
+        writeSpace();
+        write(METAMODELLING);
+        writeSpace();
+        axiom.getModelClass().accept(this);
+	}
 
     @Override
     public void visit(SWRLRule rule) {

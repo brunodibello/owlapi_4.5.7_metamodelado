@@ -492,4 +492,10 @@ public class DLExpressivityChecker extends OWLObjectVisitorAdapter {
     public void visit(OWLInverseObjectPropertiesAxiom axiom) {
         addConstruct(ROLE_INVERSE);
     }
+    
+    @Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		axiom.getMetamodelIndividual().accept(this);
+		axiom.getModelClass().accept(this);
+	}
 }

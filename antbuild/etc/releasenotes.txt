@@ -290,7 +290,7 @@ Bug fixes:
 *    [Typedef] created_by don't support space #419
 *    ttl namespace abbreviations not preserved on serialization #421
 *    Use EntitySearcher.getAnnotationObjects() when interested only in the object of annotation assertion axioms on an entity rather than the annotations on the annotation assertion axioms.
-*    convincing owlapi-distribution to export rio dependencies
+*    convincing owlapi-distribution-metamodelling to export rio dependencies
 *    RDF issues testing 4.1.0 RC 1 #412
 *    Annotation subproperty/domain/range disappear after save/load cycle (punning enhancement) #351
 

@@ -97,6 +97,7 @@ import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.SUB_OBJECT_PROPERTY_
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.SYMMETRIC_OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.TRANSITIVE_OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.VARIABLE;
+import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.METAMODELLING;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -155,6 +156,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -889,6 +891,15 @@ public class OWLXMLObjectRenderer implements OWLObjectVisitor {
         axiom.getDataRange().accept(this);
         writer.writeEndElement();
     }
+    
+    @Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		writer.writeStartElement(METAMODELLING);
+        writeAnnotations(axiom);
+        axiom.getMetamodelIndividual().accept(this);
+        axiom.getModelClass().accept(this);
+        writer.writeEndElement();	
+	}
 
     @Override
     public void visit(SWRLRule rule) {

@@ -87,6 +87,7 @@ import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubPropertyChainOfAxiom;
 import org.semanticweb.owlapi.model.OWLSymmetricObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.SWRLArgument;
 import org.semanticweb.owlapi.model.SWRLAtom;
 import org.semanticweb.owlapi.model.SWRLBuiltInAtom;
@@ -371,6 +372,13 @@ public abstract class AbstractEntityRegistrationManager extends
         for (OWLPropertyExpression prop : axiom.getPropertyExpressions()) {
             prop.accept(this);
         }
+        processAxiomAnnotations(axiom);
+    }
+    
+    @Override
+    public void visit(OWLMetamodellingAxiom axiom) {
+        axiom.getModelClass().accept(this);
+        axiom.getMetamodelIndividual().accept(this);
         processAxiomAnnotations(axiom);
     }
 

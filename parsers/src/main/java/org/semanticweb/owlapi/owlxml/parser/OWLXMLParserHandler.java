@@ -100,6 +100,7 @@ import static org.semanticweb.owlapi.owlxml.parser.PARSER_OWLXMLVocabulary.PARSE
 import static org.semanticweb.owlapi.owlxml.parser.PARSER_OWLXMLVocabulary.PARSER_TRANSITIVE_OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.owlxml.parser.PARSER_OWLXMLVocabulary.PARSER_UNION_OF;
 import static org.semanticweb.owlapi.owlxml.parser.PARSER_OWLXMLVocabulary.PARSER_VARIABLE;
+import static org.semanticweb.owlapi.owlxml.parser.PARSER_OWLXMLVocabulary.PARSER_METAMODELLING;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.IRI_ATTRIBUTE;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.NAME_ATTRIBUTE;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.PREFIX;
@@ -298,6 +299,7 @@ class OWLXMLParserHandler extends DefaultHandler implements OWLAnonymousIndividu
         addFactory(PARSER_ABBREVIATED_IRI_ELEMENT);
         addFactory(PARSER_ANONYMOUS_INDIVIDUAL);
         addFactory(PARSER_HAS_KEY);
+        addFactory(PARSER_METAMODELLING);
         addFactory(PARSER_DATATYPE_DEFINITION);
         addFactory(PARSER_DL_SAFE_RULE);
         addFactory(PARSER_BODY);

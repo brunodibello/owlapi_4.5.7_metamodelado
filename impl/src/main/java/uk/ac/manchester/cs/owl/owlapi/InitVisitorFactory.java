@@ -57,6 +57,7 @@ import org.semanticweb.owlapi.model.OWLSubDataPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSymmetricObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.util.CollectionFactory;
 import org.semanticweb.owlapi.util.OWLAxiomVisitorExAdapter;
 
@@ -237,6 +238,16 @@ public class InitVisitorFactory {
             }
             return (K) axiom.getClassExpression().asOWLClass();
         }
+        
+        @Override
+		public K visit(OWLMetamodellingAxiom axiom) {
+			if ( sub ){
+			    return (K) axiom.getModelClass();
+			}
+			else{
+				return (K) axiom.getMetamodelIndividual();
+			}
+		}
     }
 
     /**

@@ -115,6 +115,7 @@ import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubPropertyChainOfAxiom;
 import org.semanticweb.owlapi.model.OWLSymmetricObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.PrefixManager;
 import org.semanticweb.owlapi.model.SWRLAtom;
 import org.semanticweb.owlapi.model.SWRLBuiltInAtom;
@@ -1846,6 +1847,22 @@ public class OWLDataFactoryImpl implements OWLDataFactory, Serializable, OWLClas
         checkAnnotations(annotations);
         return new OWLDatatypeDefinitionAxiomImpl(datatype, dataRange, annotations);
     }
+    
+    @Override
+	public OWLMetamodellingAxiom getOWLMetamodellingAxiom(
+			OWLClassExpression modelClass, OWLIndividual metamodelIndividual) {
+		return getOWLMetamodellingAxiom(modelClass, metamodelIndividual, EMPTY_ANNOTATIONS_SET);
+	}
+
+	@Override
+	public OWLMetamodellingAxiom getOWLMetamodellingAxiom(
+			OWLClassExpression modelClass, OWLIndividual metamodelIndividual,
+			Set<? extends OWLAnnotation> annotations) {
+		checkNotNull(modelClass, "modelclass");
+		checkNotNull(metamodelIndividual, "metamodelIndividual");
+		checkAnnotations(annotations);
+		return new OWLMetamodellingAxiomImpl(modelClass, metamodelIndividual, annotations);
+	}
 
     @Override
     public OWLLiteral getOWLLiteral(String lexicalValue, OWLDatatype datatype) {

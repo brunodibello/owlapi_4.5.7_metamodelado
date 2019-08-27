@@ -127,6 +127,7 @@ public enum OWLRDFVocabulary implements HasShortForm,HasIRI,HasPrefixedName {
     /** http://www.w3.org/2002/07/owl#assertionProperty     **/    OWL_ASSERTION_PROPERTY(Namespaces.OWL, "assertionProperty"),
     /** http://www.w3.org/2002/07/owl#targetIndividual      **/    OWL_TARGET_INDIVIDUAL(Namespaces.OWL, "targetIndividual"),
     /** http://www.w3.org/2002/07/owl#targetValue           **/    OWL_TARGET_VALUE(Namespaces.OWL, "targetValue"),
+    /** http://www.w3.org/2000/01/rdf-schema#metaModelling **/     RDFS_METAMODELLING(Namespaces.RDFS, "metaModelling"),
 
     /** http://www.w3.org/2002/07/owl#InverseFunctionalProperty       **/    OWL_INVERSE_FUNCTIONAL_PROPERTY(Namespaces.OWL, "InverseFunctionalProperty"),
     /** http://www.w3.org/2002/07/owl#minQualifiedCardinality         **/    OWL_MIN_QUALIFIED_CARDINALITY(Namespaces.OWL, "minQualifiedCardinality"),

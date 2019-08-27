@@ -950,6 +950,20 @@ public class LatexObjectVisitor implements OWLObjectVisitor {
             p.accept(this);
         }
     }
+    
+    public static final String METAMODELLING = "\\ensuremath{\\sqsubseteq}";
+	@Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		setPrettyPrint(false);
+		axiom.getMetamodelIndividual().accept(this);
+		writeSpace();
+		write(METAMODELLING);
+		writeSpace();
+		axiom.getModelClass().accept(this);
+		writeSpace();
+		setPrettyPrint(true);
+
+	}
 
     @Override
     public void visit(OWLDataIntersectionOf node) {

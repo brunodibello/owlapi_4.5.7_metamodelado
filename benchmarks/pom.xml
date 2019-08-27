@@ -33,7 +33,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>owlapi-distribution</artifactId>
+			<artifactId>owlapi-distribution-metamodelling</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

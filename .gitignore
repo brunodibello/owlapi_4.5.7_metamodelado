@@ -40,3 +40,7 @@ tools/.classpath
 tools/.settings/org.eclipse.jdt.core.prefs
 osgidistribution/.DS_Store
 .DS_Store
+*.prefs
+*.class
+*.obo
+*.jj

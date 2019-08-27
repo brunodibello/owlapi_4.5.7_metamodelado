@@ -132,7 +132,8 @@ public enum OWLXMLVocabulary implements HasShortForm, HasIRI, HasPrefixedName {
     /** SAME_INDIVIDUAL_ATOM                */  SAME_INDIVIDUAL_ATOM                ("SameIndividualAtom"),
     /** DIFFERENT_INDIVIDUALS_ATOM          */  DIFFERENT_INDIVIDUALS_ATOM          ("DifferentIndividualsAtom"),
     /** VARIABLE                            */  VARIABLE                            ("Variable"),
-    /** DESCRIPTION_GRAPH_RULE              */  DESCRIPTION_GRAPH_RULE              ("DescriptionGraphRule");
+    /** DESCRIPTION_GRAPH_RULE              */  DESCRIPTION_GRAPH_RULE              ("DescriptionGraphRule"),
+    /** METAMODELLING              		    */  METAMODELLING              	     	("MetaModelling");
 //@formatter:on
     @Nonnull
     private final IRI iri;

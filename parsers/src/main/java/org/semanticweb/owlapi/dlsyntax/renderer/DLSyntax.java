@@ -41,7 +41,8 @@ public enum DLSyntax {
     /** WEDGE */            WEDGE           ("\u22C0","&#8896;"),
     /** IMPLIES */          IMPLIES         ("\u2190","&#8592;"),
     /** COMMA */            COMMA           (",",","),
-    /** SELF */             SELF            ("self","self");
+    /** SELF */             SELF            ("self","self"),
+    /** METAMODELLING */	METAMODELLING	("metaModeling","metaModeling");
     //@formatter:on
     @Nonnull
     private final String unicodeSymbol;

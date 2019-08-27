@@ -61,7 +61,8 @@ public enum KRSS2Vocabulary {
     /** SUBROLE */              SUBROLE("subrole"),
     /** SYMMETRIC_ATTR */       SYMMETRIC_ATTR(":symmetric"),
     /** TRUE */                 TRUE("t"),
-    /** TRANSITIVE_ATTR */      TRANSITIVE_ATTR(":transitive");
+    /** TRANSITIVE_ATTR */      TRANSITIVE_ATTR(":transitive"),
+    /** METAMODELLING */      	METAMODELLING("metamodelling");
     //@formatter:on
     @Nonnull
     private final String shortName;

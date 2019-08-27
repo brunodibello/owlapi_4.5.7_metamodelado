@@ -228,6 +228,18 @@ public interface OWLOntology extends OWLObject, HasAnnotations, HasDirectImports
      */
     @Nonnull
     Set<OWLAxiom> getABoxAxioms(@Nonnull Imports includeImportsClosure);
+    
+    /**
+     * Gets the axioms that form the MBox for this ontology, i.e., the ones whose type is in the
+     * AxiomType::MBoxAxiomTypes.
+     * 
+     * @param includeImportsClosure if INCLUDED, the imports closure is included.
+     * @return A set containing the axioms which are of the specified type. The set that is returned
+     *         is a copy of the axioms in the ontology (and its imports closure) - it will not be
+     *         updated if the ontology changes.
+     */
+    @Nonnull
+    Set<OWLAxiom> getMBoxAxioms(@Nonnull Imports includeImportsClosure);
 
     /**
      * Gets the axioms that form the RBox for this ontology, i.e., the ones whose type is in the

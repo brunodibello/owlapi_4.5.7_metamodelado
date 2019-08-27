@@ -57,6 +57,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -564,6 +565,16 @@ public class OWLTutorialSyntaxObjectRenderer extends OWLObjectVisitorAdapter {
     public void visit(@Nonnull OWLTransitiveObjectPropertyAxiom axiom) {
         writePropertyCharacteristic("transitive", axiom, axiom.getProperty());
     }
+    
+	@Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		axiom.getMetamodelIndividual().accept(this);
+        writeSpace();
+        write(keyword("metaModelling"));
+        writeSpace();
+        axiom.getModelClass().accept(this);
+
+	}
 
     @Override
     public void visit(OWLClass ce) {

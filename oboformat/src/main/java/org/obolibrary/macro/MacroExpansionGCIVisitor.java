@@ -16,6 +16,7 @@ import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNamedObject;
 import org.semanticweb.owlapi.model.OWLObjectHasValue;
@@ -239,6 +240,12 @@ public class MacroExpansionGCIVisitor {
                 }
                 return result;
             }
+
+			@Override
+			public OWLAxiom visit(OWLMetamodellingAxiom axiom) {
+				// TODO Auto-generated method stub
+				return null;
+			}
         }
     }
 

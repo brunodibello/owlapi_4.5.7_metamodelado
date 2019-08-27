@@ -235,6 +235,11 @@ public class OWLObjectDesharer implements OWLObjectVisitorEx<OWLObject> {
     public OWLTransitiveObjectPropertyAxiom visit(OWLTransitiveObjectPropertyAxiom axiom) {
         return df.getOWLTransitiveObjectPropertyAxiom(get(axiom.getProperty()), anns(axiom));
     }
+    
+    @Override
+    public OWLMetamodellingAxiom visit(OWLMetamodellingAxiom axiom) {
+        return df.getOWLMetamodellingAxiom(get(axiom.getModelClass()),get(axiom.getMetamodelIndividual()), anns(axiom));
+    }
 
     @Override
     public OWLClass visit(OWLClass ce) {

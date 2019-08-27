@@ -256,6 +256,12 @@ public class MacroExpansionVisitor {
             }
             return result;
         }
+
+		@Override
+		public OWLAxiom visit(OWLMetamodellingAxiom axiom) {
+			// TODO Auto-generated method stub
+			return null;
+		}
     }
 
     /**

@@ -46,4 +46,14 @@ public interface OWLAxiomVisitorEx<O> extends OWLAnnotationAxiomVisitorEx<O>,
      */
     @Nonnull
     O visit(@Nonnull OWLDatatypeDefinitionAxiom axiom);
+    
+    /**
+     * visit OWLMetamodellingAxiom type
+     * 
+     * @param axiom
+     *        axiom to visit
+     * @return visitor value
+     */
+    @Nonnull
+    O visit(@Nonnull OWLMetamodellingAxiom axiom);
 }

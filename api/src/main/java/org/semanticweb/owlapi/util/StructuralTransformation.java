@@ -518,5 +518,10 @@ public class StructuralTransformation implements Serializable {
         public Set<OWLAxiom> visit(OWLDatatypeDefinitionAxiom axiom) {
             return toSet(axiom);
         }
+        
+        @Override
+		public Set<OWLAxiom> visit(OWLMetamodellingAxiom axiom) {
+			return toSet(axiom);
+		}
     }
 }

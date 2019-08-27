@@ -245,6 +245,8 @@ public final class AxiomType<C extends OWLAxiom> implements Serializable {
     /** DisjointDataProperties */           @Nonnull public static final AxiomType<OWLDisjointDataPropertiesAxiom>           DISJOINT_DATA_PROPERTIES            = getInstance(OWLDisjointDataPropertiesAxiom.class,          31, "DisjointDataProperties",          true, true, true);
 
     /** DatatypeDefinition */               @Nonnull public static final AxiomType<OWLDatatypeDefinitionAxiom>               DATATYPE_DEFINITION                 = getInstance(OWLDatatypeDefinitionAxiom.class,              38, "DatatypeDefinition",              true, true, true);
+    
+    /** Metamodelling */		            @Nonnull public static final AxiomType<OWLMetamodellingAxiom>                    METAMODELLING                       = getInstance(OWLMetamodellingAxiom.class,                   39, "Metamodelling",                   false, false, true);
 
     /** HasKey */                           @Nonnull public static final AxiomType<OWLHasKeyAxiom>                           HAS_KEY                             = getInstance(OWLHasKeyAxiom.class,                          32, "HasKey",                          true, true, true);
 
@@ -269,7 +271,7 @@ public final class AxiomType<C extends OWLAxiom> implements Serializable {
         DISJOINT_DATA_PROPERTIES, SUB_DATA_PROPERTY, EQUIVALENT_DATA_PROPERTIES,
         FUNCTIONAL_DATA_PROPERTY, DATATYPE_DEFINITION, DISJOINT_UNION, DECLARATION, SWRL_RULE,
         ANNOTATION_ASSERTION, SUB_ANNOTATION_PROPERTY_OF, ANNOTATION_PROPERTY_DOMAIN,
-        ANNOTATION_PROPERTY_RANGE, HAS_KEY);
+        ANNOTATION_PROPERTY_RANGE, HAS_KEY, METAMODELLING);
     private static final Map<String, AxiomType<?>> NAME_TYPE_MAP =
         Maps.uniqueIndex(AXIOM_TYPES, new Function<AxiomType<?>, String>() {
 
@@ -353,5 +355,7 @@ public final class AxiomType<C extends OWLAxiom> implements Serializable {
     /** set of tbox and rbox axiom types */
     @Nonnull public static final Set<AxiomType<?>> TBoxAndRBoxAxiomTypes = Sets.newHashSet(Iterables.concat(
         TBoxAxiomTypes, RBoxAxiomTypes));
+    /** set of mbox axiom types */
+    @Nonnull public static final Set<AxiomType<?>> MBoxAxiomTypes = CollectionFactory.createSet((AxiomType<?>) METAMODELLING);
 //@formatter:off
 }

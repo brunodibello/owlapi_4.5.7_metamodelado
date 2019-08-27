@@ -692,6 +692,19 @@ public class OWLObjectTransformer<T> {
             return update(df.getOWLHasKeyAxiom(t(axiom.getClassExpression()), t(axiom.getPropertyExpressions()), t(axiom
                 .getAnnotations())), axiom);
         }
+        
+        @Override
+        public Object visit(OWLMetamodellingAxiom axiom) {
+            OWLAxiom transform = checkAxiom(axiom);
+            if (transform != null) {
+                return transform;
+            }
+            if (!predicate.apply(axiom)) {
+                return axiom;
+            }
+            return update(df.getOWLMetamodellingAxiom(t(axiom.getModelClass()), t(axiom.getMetamodelIndividual()), t(axiom
+                .getAnnotations())), axiom);
+        }
 
         @Override
         public Object visit(SWRLRule rule) {

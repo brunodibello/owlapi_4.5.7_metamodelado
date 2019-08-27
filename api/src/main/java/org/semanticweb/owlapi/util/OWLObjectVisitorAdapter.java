@@ -36,6 +36,7 @@ import org.semanticweb.owlapi.model.OWLDatatypeDefinitionAxiom;
 import org.semanticweb.owlapi.model.OWLDatatypeRestriction;
 import org.semanticweb.owlapi.model.OWLFacetRestriction;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectComplementOf;
@@ -251,6 +252,11 @@ public class OWLObjectVisitorAdapter extends OWLAxiomVisitorAdapter implements
     public void visit(OWLSubAnnotationPropertyOfAxiom axiom) {
         handleDefault(axiom);
     }
+    
+    @Override
+	public void visit(OWLMetamodellingAxiom axiom) {
+		handleDefault(axiom);
+	}
 
     @Override
     public void visit(OWLAnonymousIndividual individual) {

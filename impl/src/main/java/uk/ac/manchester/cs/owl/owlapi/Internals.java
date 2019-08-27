@@ -45,6 +45,7 @@ import static org.semanticweb.owlapi.model.AxiomType.SUB_DATA_PROPERTY;
 import static org.semanticweb.owlapi.model.AxiomType.SUB_OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.model.AxiomType.SYMMETRIC_OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.model.AxiomType.TRANSITIVE_OBJECT_PROPERTY;
+import static org.semanticweb.owlapi.model.AxiomType.METAMODELLING;
 import static org.semanticweb.owlapi.util.CollectionFactory.createLinkedSet;
 import static org.semanticweb.owlapi.util.CollectionFactory.createSyncSet;
 import static org.semanticweb.owlapi.util.OWLAPIPreconditions.checkNotNull;
@@ -133,6 +134,7 @@ import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.model.OWLSubPropertyChainOfAxiom;
 import org.semanticweb.owlapi.model.OWLSymmetricObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLTransitiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.parameters.Navigation;
 import org.semanticweb.owlapi.search.Filters;
 import org.semanticweb.owlapi.util.OWLAxiomSearchFilter;
@@ -221,6 +223,8 @@ public class Internals implements Serializable {
     //@formatter:off
     @Nonnull protected transient MapPointer<OWLClassExpression, OWLClassAssertionAxiom>                          classAssertionAxiomsByClass                         = buildLazy(CLASS_ASSERTION, CLASSEXPRESSIONS);
     @Nonnull protected transient MapPointer<OWLAnnotationSubject, OWLAnnotationAssertionAxiom>                   annotationAssertionAxiomsBySubject                  = buildLazy(ANNOTATION_ASSERTION, ANNOTSUPERNAMED);
+    @Nonnull protected transient MapPointer<OWLIndividual, OWLMetamodellingAxiom> 								 metamodellingAxiomsByIndividual 					 = buildLazy(METAMODELLING, ICOLLECTIONS);
+    @Nonnull protected transient MapPointer<OWLClassExpression, OWLMetamodellingAxiom> 							 metamodellingAxiomsByClass 						 = buildLazy(METAMODELLING, CLASSCOLLECTIONS);
     @Nonnull protected transient MapPointer<OWLClass, OWLSubClassOfAxiom>                                        subClassAxiomsBySubPosition                         = buildLazy(SUBCLASS_OF, CLASSSUBNAMED);
     @Nonnull protected transient MapPointer<OWLClass, OWLSubClassOfAxiom>                                        subClassAxiomsBySuperPosition                       = buildLazy(SUBCLASS_OF, CLASSSUPERNAMED);
     @Nonnull protected transient MapPointer<OWLObjectPropertyExpression, OWLSubObjectPropertyOfAxiom>            objectSubPropertyAxiomsBySubPosition                = buildLazy(SUB_OBJECT_PROPERTY, OPSUBNAMED);
@@ -337,6 +341,9 @@ public class Internals implements Serializable {
             buildLazy(NEGATIVE_DATA_PROPERTY_ASSERTION, INDIVIDUALSUBNAMED);
         differentIndividualsAxiomsByIndividual = buildLazy(DIFFERENT_INDIVIDUALS, ICOLLECTIONS);
         sameIndividualsAxiomsByIndividual = buildLazy(SAME_INDIVIDUAL, ICOLLECTIONS);
+        metamodellingAxiomsByIndividual = buildLazy(METAMODELLING, INDIVIDUALSUBNAMED);
+        metamodellingAxiomsByClass = buildLazy(METAMODELLING, CLASSCOLLECTIONS);
+        
         for (OWLAxiom ax : axiomsForSerialization) {
             addAxiom(ax);
         }
@@ -420,6 +427,8 @@ public class Internals implements Serializable {
         negativeDataPropertyAssertionAxiomsByIndividual.trimToSize();
         differentIndividualsAxiomsByIndividual.trimToSize();
         sameIndividualsAxiomsByIndividual.trimToSize();
+        metamodellingAxiomsByIndividual.trimToSize();
+        metamodellingAxiomsByClass.trimToSize();
     }
 
     private void writeObject(ObjectOutputStream stream) throws IOException {
@@ -683,6 +692,9 @@ public class Internals implements Serializable {
             if (axiom.equals(OWLSameIndividualAxiom.class)) {
                 return Optional.of((MapPointer<T, A>) sameIndividualsAxiomsByIndividual);
             }
+            if (axiom.equals(OWLMetamodellingAxiom.class)) {
+                return Optional.of((MapPointer<T, A>) metamodellingAxiomsByIndividual);
+            }
         }
         if (type.equals(OWLClass.class)) {
             if (axiom.equals(OWLSubClassOfAxiom.class)) {
@@ -706,6 +718,9 @@ public class Internals implements Serializable {
             }
             if (axiom.equals(OWLHasKeyAxiom.class)) {
                 return Optional.of((MapPointer<T, A>) hasKeyAxiomsByClass);
+            }
+            if (axiom.equals(OWLMetamodellingAxiom.class)) {
+                return Optional.of((MapPointer<T, A>) metamodellingAxiomsByClass);
             }
         }
         return Optional.absent();
@@ -1294,6 +1309,12 @@ public class Internals implements Serializable {
         public void visit(OWLSubPropertyChainOfAxiom axiom) {
             addPropertyChainSubPropertyAxioms(axiom);
         }
+        
+        @Override
+        public void visit(OWLMetamodellingAxiom axiom) {
+        	metamodellingAxiomsByIndividual.put(axiom.getMetamodelIndividual(),axiom);
+        	metamodellingAxiomsByClass.put(axiom.getModelClass(),axiom);
+        }
     }
 
     class RemoveAxiomVisitor extends OWLAxiomVisitorAdapter implements Serializable {
@@ -1521,6 +1542,12 @@ public class Internals implements Serializable {
         @Override
         public void visit(OWLSubPropertyChainOfAxiom axiom) {
             removePropertyChainSubPropertyAxioms(axiom);
+        }
+        
+        @Override
+        public void visit(OWLMetamodellingAxiom axiom) {
+        	metamodellingAxiomsByIndividual.remove(axiom.getMetamodelIndividual(),axiom);
+        	metamodellingAxiomsByClass.remove(axiom.getModelClass(),axiom);
         }
     }
 

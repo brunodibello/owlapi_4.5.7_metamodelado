@@ -306,6 +306,13 @@ public class ConcurrentOWLOntologyImpl implements OWLMutableOntology, HasTrimToS
     public Set<OWLAxiom> getABoxAxioms(@Nonnull Imports imports) {
         return withReadLock(() -> delegate.getABoxAxioms(imports));
     }
+    
+    @Override
+    @Nonnull
+    public Set<OWLAxiom> getMBoxAxioms(@Nonnull Imports imports) {
+        return withReadLock(() -> delegate.getMBoxAxioms(imports));
+    }
+
 
     @Override
     @Nonnull

@@ -122,7 +122,8 @@ public enum ManchesterOWLSyntax {
     /**SUPER_PROPERTY_OF           */    SUPER_PROPERTY_OF           ("SuperPropertyOf",           false, true,  true,  false, false),
     /**SUB_PROPERTY_CHAIN          */    SUB_PROPERTY_CHAIN          ("SubPropertyChain",          false, true,  true,  false, false),
     /**HAS_KEY                     */    HAS_KEY                     ("HasKey",                    false, true,  false, false, false),
-    /**RULE                        */    RULE                        ("Rule",                      true,  true,  false, false, false);
+    /**RULE                        */    RULE                        ("Rule",                      true,  true,  false, false, false),
+    /**METAMODELLING               */    METAMODELLING				 ("MetaModeling", 			   false, true,  true,  false, false);
 
     //@formatter:on
     private final boolean frameKeyword;

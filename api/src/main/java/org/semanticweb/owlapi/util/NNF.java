@@ -64,6 +64,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
@@ -658,4 +659,9 @@ public class NNF extends OWLDataVisitorExAdapter<OWLDataRange> implements
     public OWLAxiom visit(OWLDatatypeDefinitionAxiom axiom) {
         return axiom;
     }
+    
+    @Override
+	public OWLAxiom visit(OWLMetamodellingAxiom axiom) {
+		return dataFactory.getOWLMetamodellingAxiom(axiom.getModelClass().accept(this), axiom.getMetamodelIndividual());
+	}
 }

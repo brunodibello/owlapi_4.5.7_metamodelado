@@ -150,6 +150,11 @@ public class HornAxiomVisitorEx extends OWLAxiomVisitorExAdapter<Boolean> {
     public Boolean visit(OWLInverseObjectPropertiesAxiom axiom) {
         return b(true);
     }
+    
+    @Override
+	public Boolean visit(OWLMetamodellingAxiom axiom) {
+		return b(false);
+	}
 
     private class PositiveAppearanceVisitorEx extends OWLClassExpressionVisitorExAdapter<Boolean> {
 
