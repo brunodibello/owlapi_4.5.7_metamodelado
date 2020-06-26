@@ -962,7 +962,19 @@ public class LatexObjectVisitor implements OWLObjectVisitor {
 		axiom.getModelClass().accept(this);
 		writeSpace();
 		setPrettyPrint(true);
-
+	}
+	
+	public static final String METARULE = "\\ensuremath{\\sqsubseteq}";
+	@Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		setPrettyPrint(false);
+		axiom.getPropertyR().accept(this);
+		writeSpace();
+		write(METARULE);
+		writeSpace();
+		axiom.getPropertyS().accept(this);
+		writeSpace();
+		setPrettyPrint(true);
 	}
 
     @Override

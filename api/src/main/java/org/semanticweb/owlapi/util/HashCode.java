@@ -60,6 +60,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetaRuleAxiom;
 import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
@@ -821,9 +822,17 @@ public class HashCode implements OWLObjectVisitor, SWRLObjectVisitor {
     
 	@Override
 	public void visit(OWLMetamodellingAxiom axiom) {
-		hashCode = 147;
+		hashCode = primes[83];
 		hashCode = hashCode * MULT + axiom.getMetamodelIndividual().hashCode();
 		hashCode = hashCode * MULT + axiom.getModelClass().hashCode();
+		hashCode = hashCode * MULT + axiom.getAnnotations().hashCode(); 
+	}
+	
+	@Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		hashCode = primes[84];
+		hashCode = hashCode * MULT + axiom.getPropertyR().hashCode();
+		hashCode = hashCode * MULT + axiom.getPropertyS().hashCode();
 		hashCode = hashCode * MULT + axiom.getAnnotations().hashCode(); 
 	}
 }

@@ -431,6 +431,14 @@ public class StructureWalker<O extends OWLObject> implements OWLObjectVisitor {
         axiom.getModelClass().accept(this);
         axiom.getMetamodelIndividual().accept(this);
     }
+    
+    @Override
+    public void visit(OWLMetaRuleAxiom axiom) {
+        process(axiom);
+        walkerCallback.ax = axiom;
+        axiom.getPropertyR().accept(this);
+        axiom.getPropertyS().accept(this);
+    }
 
     @Override
     public void visit(SWRLRule rule) {

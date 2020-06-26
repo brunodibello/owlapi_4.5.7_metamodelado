@@ -71,6 +71,7 @@ import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.FUNCTIONAL_DATA_PROP
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.FUNCTIONAL_OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.HAS_KEY;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.METAMODELLING;
+import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.METARULE;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.HEAD;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.IMPORT;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.INVERSE_FUNCTIONAL_OBJECT_PROPERTY;
@@ -247,6 +248,7 @@ enum PARSER_OWLXMLVocabulary implements HasIRI {
     /** NEGATIVE_DATA_PROPERTY_ASSERTION    */  PARSER_NEGATIVE_DATA_PROPERTY_ASSERTION    (NEGATIVE_DATA_PROPERTY_ASSERTION    ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLNegativeDataPropertyAssertionAxiomElementHandler(             handler); } },
     /** HAS_KEY                             */  PARSER_HAS_KEY                             (HAS_KEY                             ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLHasKeyElementHandler(handler); } },
     /** METAMODELLING                       */  PARSER_METAMODELLING                       (METAMODELLING                       ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLMetamodellingAxiomElementHandler(handler); } },
+    /** METARULE                       		*/  PARSER_METARULE                       	   (METARULE                       	    ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLMetaRuleAxiomElementHandler(handler); } },
     /** DECLARATION                         */  PARSER_DECLARATION                         (DECLARATION                         ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLDeclarationAxiomElementHandler(handler); } },
     /** ANNOTATION_ASSERTION                */  PARSER_ANNOTATION_ASSERTION                (ANNOTATION_ASSERTION                ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLAnnotationAssertionElementHandler(handler); } },
     /** ANNOTATION_PROPERTY_DOMAIN          */  PARSER_ANNOTATION_PROPERTY_DOMAIN          (ANNOTATION_PROPERTY_DOMAIN          ) { @Nonnull @Override public OWLElementHandler<?> createHandler(@Nonnull OWLXMLParserHandler handler) { return new OWLAnnotationPropertyDomainElementHandler(handler); } },
@@ -1518,6 +1520,41 @@ class OWLMetamodellingAxiomElementHandler extends AbstractOWLAxiomElementHandler
 		assert modelClass != null;
 		assert metaIndividual != null;
 		return df.getOWLMetamodellingAxiom(verifyNotNull(modelClass), verifyNotNull(metaIndividual), annotations);
+	}
+}
+
+class OWLMetaRuleAxiomElementHandler extends AbstractOWLAxiomElementHandler {
+
+    private OWLObjectPropertyExpression propertyR;
+    private OWLObjectPropertyExpression propertyS;
+
+    OWLMetaRuleAxiomElementHandler(@Nonnull OWLXMLParserHandler handler) {
+        super(handler);
+    }
+
+    @Override
+   	public void startElement(String name) throws OWLXMLParserException {
+       super.startElement(name);
+       propertyR = null;
+       propertyS = null;
+    }
+
+   @Override
+   public void handleChild(AbstractOWLObjectPropertyElementHandler handler) {
+	   if (propertyR == null) {
+		   propertyR = handler.getOWLObject();
+	   } else {
+		   propertyS = handler.getOWLObject();
+	   }
+   }
+
+   @Override
+   OWLAxiom createAxiom() {
+		ensureNotNull(propertyR, "propertyR");
+		ensureNotNull(propertyS, "propertyS");
+		assert propertyR != null;
+		assert propertyS != null;
+		return df.getOWLMetaRuleAxiom(verifyNotNull(propertyR), verifyNotNull(propertyS), annotations);
 	}
 }
 

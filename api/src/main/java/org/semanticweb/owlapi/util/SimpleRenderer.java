@@ -71,6 +71,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetaRuleAxiom;
 import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
@@ -580,6 +581,16 @@ public class SimpleRenderer implements OWLObjectVisitor, OWLObjectRenderer {
         axiom.getMetamodelIndividual().accept(this);
         insertSpace();
         axiom.getModelClass().accept(this);
+        sb.append(")");
+	}
+	
+	@Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		sb.append("MetaRule(");
+        writeAnnotations(axiom);
+        axiom.getPropertyR().accept(this);
+        insertSpace();
+        axiom.getPropertyS().accept(this);
         sb.append(")");
 	}
 

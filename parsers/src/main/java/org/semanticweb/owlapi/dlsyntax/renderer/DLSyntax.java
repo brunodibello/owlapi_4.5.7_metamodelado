@@ -42,7 +42,8 @@ public enum DLSyntax {
     /** IMPLIES */          IMPLIES         ("\u2190","&#8592;"),
     /** COMMA */            COMMA           (",",","),
     /** SELF */             SELF            ("self","self"),
-    /** METAMODELLING */	METAMODELLING	("metaModeling","metaModeling");
+    /** METAMODELLING */	METAMODELLING	("metaModeling","metaModeling"),
+    /** METARULE */			METARULE		("metaRule","metaRule");
     //@formatter:on
     @Nonnull
     private final String unicodeSymbol;

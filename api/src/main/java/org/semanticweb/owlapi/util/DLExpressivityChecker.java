@@ -498,4 +498,10 @@ public class DLExpressivityChecker extends OWLObjectVisitorAdapter {
 		axiom.getMetamodelIndividual().accept(this);
 		axiom.getModelClass().accept(this);
 	}
+    
+    @Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		axiom.getPropertyR().accept(this);
+		axiom.getPropertyS().accept(this);
+	}
 }

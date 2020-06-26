@@ -42,6 +42,7 @@ import org.semanticweb.owlapi.model.OWLDataRange;
 import org.semanticweb.owlapi.model.OWLDataSomeValuesFrom;
 import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
 import org.semanticweb.owlapi.model.OWLIndividual;
+import org.semanticweb.owlapi.model.OWLMetaRuleAxiom;
 import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
@@ -341,7 +342,15 @@ public class KRSS2OWLObjectRenderer extends OWLObjectVisitorAdapter {
         write(axiom.getMetamodelIndividual());
         write(axiom.getModelClass());
         writeCloseBracket();
-
+	}
+    
+    @Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		writeOpenBracket();
+        write(METARULE);
+        write(axiom.getPropertyR());
+        write(axiom.getPropertyS());
+        writeCloseBracket();
 	}
 
     @Override

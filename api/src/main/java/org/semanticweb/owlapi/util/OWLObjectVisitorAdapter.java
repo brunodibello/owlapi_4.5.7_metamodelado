@@ -36,6 +36,7 @@ import org.semanticweb.owlapi.model.OWLDatatypeDefinitionAxiom;
 import org.semanticweb.owlapi.model.OWLDatatypeRestriction;
 import org.semanticweb.owlapi.model.OWLFacetRestriction;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetaRuleAxiom;
 import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
@@ -255,6 +256,11 @@ public class OWLObjectVisitorAdapter extends OWLAxiomVisitorAdapter implements
     
     @Override
 	public void visit(OWLMetamodellingAxiom axiom) {
+		handleDefault(axiom);
+	}
+    
+    @Override
+	public void visit(OWLMetaRuleAxiom axiom) {
 		handleDefault(axiom);
 	}
 

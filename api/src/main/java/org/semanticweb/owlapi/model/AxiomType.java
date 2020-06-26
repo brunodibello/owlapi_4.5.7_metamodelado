@@ -247,6 +247,7 @@ public final class AxiomType<C extends OWLAxiom> implements Serializable {
     /** DatatypeDefinition */               @Nonnull public static final AxiomType<OWLDatatypeDefinitionAxiom>               DATATYPE_DEFINITION                 = getInstance(OWLDatatypeDefinitionAxiom.class,              38, "DatatypeDefinition",              true, true, true);
     
     /** Metamodelling */		            @Nonnull public static final AxiomType<OWLMetamodellingAxiom>                    METAMODELLING                       = getInstance(OWLMetamodellingAxiom.class,                   39, "Metamodelling",                   false, false, true);
+    /** MetaRule */		                    @Nonnull public static final AxiomType<OWLMetaRuleAxiom>                         METARULE                            = getInstance(OWLMetaRuleAxiom.class,                        40, "MetaRule",                        false, false, true);
 
     /** HasKey */                           @Nonnull public static final AxiomType<OWLHasKeyAxiom>                           HAS_KEY                             = getInstance(OWLHasKeyAxiom.class,                          32, "HasKey",                          true, true, true);
 
@@ -271,7 +272,7 @@ public final class AxiomType<C extends OWLAxiom> implements Serializable {
         DISJOINT_DATA_PROPERTIES, SUB_DATA_PROPERTY, EQUIVALENT_DATA_PROPERTIES,
         FUNCTIONAL_DATA_PROPERTY, DATATYPE_DEFINITION, DISJOINT_UNION, DECLARATION, SWRL_RULE,
         ANNOTATION_ASSERTION, SUB_ANNOTATION_PROPERTY_OF, ANNOTATION_PROPERTY_DOMAIN,
-        ANNOTATION_PROPERTY_RANGE, HAS_KEY, METAMODELLING);
+        ANNOTATION_PROPERTY_RANGE, HAS_KEY, METAMODELLING, METARULE);
     private static final Map<String, AxiomType<?>> NAME_TYPE_MAP =
         Maps.uniqueIndex(AXIOM_TYPES, new Function<AxiomType<?>, String>() {
 
@@ -356,6 +357,7 @@ public final class AxiomType<C extends OWLAxiom> implements Serializable {
     @Nonnull public static final Set<AxiomType<?>> TBoxAndRBoxAxiomTypes = Sets.newHashSet(Iterables.concat(
         TBoxAxiomTypes, RBoxAxiomTypes));
     /** set of mbox axiom types */
-    @Nonnull public static final Set<AxiomType<?>> MBoxAxiomTypes = CollectionFactory.createSet((AxiomType<?>) METAMODELLING);
+    @Nonnull public static final Set<AxiomType<?>> MBoxAxiomTypes = CollectionFactory.createSet(
+    		(AxiomType<?>) METAMODELLING, METARULE);
 //@formatter:off
 }

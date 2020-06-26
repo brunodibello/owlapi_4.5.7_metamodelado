@@ -142,6 +142,11 @@ public class SyntacticLocalityEvaluator implements LocalityEvaluator {
         public void visit(OWLMetamodellingAxiom axiom) {
             isLocal = true;
         }
+        
+        @Override
+        public void visit(OWLMetaRuleAxiom axiom) {
+            isLocal = true;
+        }
 
         // BUGFIX: (TS) Asymm OP axioms are local in the *_BOTTOM case:
         // The empty object property is asymmetric!

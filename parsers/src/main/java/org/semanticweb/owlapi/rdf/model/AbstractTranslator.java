@@ -85,6 +85,7 @@ import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_NIL;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_REST;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDF_TYPE;
 import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDFS_METAMODELLING;
+import static org.semanticweb.owlapi.vocab.OWLRDFVocabulary.RDFS_METARULE;
 import static org.semanticweb.owlapi.vocab.SWRLVocabulary.ARGUMENTS;
 import static org.semanticweb.owlapi.vocab.SWRLVocabulary.ARGUMENT_1;
 import static org.semanticweb.owlapi.vocab.SWRLVocabulary.ARGUMENT_2;
@@ -696,6 +697,11 @@ public abstract class AbstractTranslator<N extends Serializable, R extends N, P 
     @Override
 	public void visit(OWLMetamodellingAxiom axiom) {
     	addSingleTripleAxiom(axiom, axiom.getMetamodelIndividual(), RDFS_METAMODELLING.getIRI(), axiom.getModelClass());
+	}
+    
+    @Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+    	addSingleTripleAxiom(axiom, axiom.getPropertyR(), RDFS_METARULE.getIRI(), axiom.getPropertyS());
 	}
 
     @Override

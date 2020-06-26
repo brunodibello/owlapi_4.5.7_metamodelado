@@ -43,6 +43,7 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetaRuleAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLObject;
@@ -246,6 +247,16 @@ public class InitVisitorFactory {
 			}
 			else{
 				return (K) axiom.getMetamodelIndividual();
+			}
+		}
+        
+        @Override
+		public K visit(OWLMetaRuleAxiom axiom) {
+			if ( sub ){
+			    return (K) axiom.getPropertyR();
+			}
+			else{
+				return (K) axiom.getPropertyS();
 			}
 		}
     }

@@ -42,4 +42,10 @@ public interface OWLAxiomVisitor extends OWLAnnotationAxiomVisitor,
      *        axiom to visit
      */
 	void visit(@Nonnull OWLMetamodellingAxiom axiom);
+	
+	/**
+     * @param axiom
+     *        axiom to visit
+     */
+	void visit(@Nonnull OWLMetaRuleAxiom axiom);
 }

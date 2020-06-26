@@ -33,6 +33,7 @@ import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
 import org.semanticweb.owlapi.model.OWLDisjointUnionAxiom;
 import org.semanticweb.owlapi.model.OWLEquivalentClassesAxiom;
 import org.semanticweb.owlapi.model.OWLHasKeyAxiom;
+import org.semanticweb.owlapi.model.OWLMetaRuleAxiom;
 import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLObjectAllValuesFrom;
 import org.semanticweb.owlapi.model.OWLObjectComplementOf;
@@ -276,6 +277,14 @@ public class OWLClassExpressionCollector extends
 		Set<OWLClassExpression> result = new HashSet<>();
         result.addAll(axiom.getModelClass().accept(this));
         result.addAll(axiom.getMetamodelIndividual().accept(this));
+        return result;
+	}
+	
+	@Override
+	public Set<OWLClassExpression> visit(OWLMetaRuleAxiom axiom) {
+		Set<OWLClassExpression> result = new HashSet<>();
+        result.addAll(axiom.getPropertyR().accept(this));
+        result.addAll(axiom.getPropertyS().accept(this));
         return result;
 	}
 

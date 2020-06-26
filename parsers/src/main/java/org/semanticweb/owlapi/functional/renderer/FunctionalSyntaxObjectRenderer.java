@@ -98,6 +98,7 @@ import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.SYMMETRIC_OBJECT_PRO
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.TRANSITIVE_OBJECT_PROPERTY;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.VARIABLE;
 import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.METAMODELLING;
+import static org.semanticweb.owlapi.vocab.OWLXMLVocabulary.METARULE;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -1281,7 +1282,15 @@ public class FunctionalSyntaxObjectRenderer implements OWLObjectVisitor {
         writeSpace();
         axiom.getModelClass().accept(this);
         writeAxiomEnd();
-
+	}
+    
+    @Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		writeAxiomStart(METARULE, axiom);
+        axiom.getPropertyR().accept(this);
+        writeSpace();
+        axiom.getPropertyS().accept(this);
+        writeAxiomEnd();
 	}
 
     @Override

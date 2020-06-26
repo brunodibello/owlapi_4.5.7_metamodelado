@@ -262,6 +262,12 @@ public class MacroExpansionVisitor {
 			// TODO Auto-generated method stub
 			return null;
 		}
+		
+		@Override
+		public OWLAxiom visit(OWLMetaRuleAxiom axiom) {
+			// TODO Auto-generated method stub
+			return null;
+		}
     }
 
     /**

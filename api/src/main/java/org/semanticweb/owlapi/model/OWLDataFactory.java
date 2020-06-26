@@ -1403,6 +1403,30 @@ public interface OWLDataFactory extends SWRLDataFactory, OWLEntityProvider,
     @Nonnull
 	OWLMetamodellingAxiom getOWLMetamodellingAxiom(OWLClassExpression modelClass,
 			OWLIndividual metamodelIndividual,  Set<? extends OWLAnnotation> annotations);
+    
+    /**
+     * @param propertyR 
+     *        R
+     * @param propertyS
+     *        S
+     * @return a metarule axiom with the specified properties
+     */
+    @Nonnull
+	OWLMetaRuleAxiom getOWLMetaRuleAxiom(OWLObjectPropertyExpression propertyR,
+			OWLObjectPropertyExpression propertyS);
+
+    /**
+     * @param propertyR
+     *        class
+     * @param propertyS
+     *        individual
+     * @param annotations
+     *        A set of annotations. Cannot be null or contain nulls.
+     * @return a metarule axiom with the specified properties
+     */
+    @Nonnull
+    OWLMetaRuleAxiom getOWLMetaRuleAxiom(OWLObjectPropertyExpression propertyR,
+			OWLObjectPropertyExpression propertyS,  Set<? extends OWLAnnotation> annotations);
 
     // Object property axioms
     /**

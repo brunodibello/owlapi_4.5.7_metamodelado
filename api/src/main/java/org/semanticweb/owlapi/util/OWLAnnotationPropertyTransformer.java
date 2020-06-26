@@ -449,6 +449,15 @@ public class OWLAnnotationPropertyTransformer implements OWLObjectVisitor, SWRLO
         OWLIndividual metamodelIndividual = getLastObject();
         obj = dataFactory.getOWLMetamodellingAxiom(modelClass, metamodelIndividual, duplicateAxiomAnnotations(axiom));
     }
+    
+    @Override
+    public void visit(@Nonnull OWLMetaRuleAxiom axiom) {
+        axiom.getPropertyR().accept(this);
+        OWLObjectPropertyExpression propertyR = getLastObject();
+        axiom.getPropertyS().accept(this);
+        OWLObjectPropertyExpression propertyS = getLastObject();
+        obj = dataFactory.getOWLMetaRuleAxiom(propertyR, propertyS, duplicateAxiomAnnotations(axiom));
+    }
 
     @Override
     public void visit(@Nonnull OWLClass ce) {

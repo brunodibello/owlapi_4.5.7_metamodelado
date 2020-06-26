@@ -155,6 +155,11 @@ public class HornAxiomVisitorEx extends OWLAxiomVisitorExAdapter<Boolean> {
 	public Boolean visit(OWLMetamodellingAxiom axiom) {
 		return b(false);
 	}
+    
+    @Override
+	public Boolean visit(OWLMetaRuleAxiom axiom) {
+		return b(false);
+	}
 
     private class PositiveAppearanceVisitorEx extends OWLClassExpressionVisitorExAdapter<Boolean> {
 

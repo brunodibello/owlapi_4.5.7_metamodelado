@@ -45,6 +45,7 @@ import org.semanticweb.owlapi.model.OWLHasKeyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
+import org.semanticweb.owlapi.model.OWLMetaRuleAxiom;
 import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNegativeObjectPropertyAssertionAxiom;
@@ -294,5 +295,10 @@ public class AxiomSubjectProvider implements OWLAxiomVisitor {
     @Override
 	public void visit(OWLMetamodellingAxiom axiom) {
 		subject = axiom.getModelClass();
+	}
+    
+    @Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		subject = axiom.getPropertyR();
 	}
 }

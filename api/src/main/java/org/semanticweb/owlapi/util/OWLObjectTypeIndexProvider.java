@@ -60,6 +60,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetaRuleAxiom;
 import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
@@ -375,7 +376,11 @@ public class OWLObjectTypeIndexProvider implements OWLObjectVisitor {
 	@Override
 	public void visit(OWLMetamodellingAxiom axiom) {
 		type = AXIOM_TYPE_INDEX_BASE + axiom.getAxiomType().getIndex();
-
+	}
+	
+	@Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		type = AXIOM_TYPE_INDEX_BASE + axiom.getAxiomType().getIndex();
 	}
 
     @Override

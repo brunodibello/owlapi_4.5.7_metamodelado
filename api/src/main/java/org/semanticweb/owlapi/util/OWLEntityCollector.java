@@ -69,6 +69,7 @@ import org.semanticweb.owlapi.model.OWLInverseFunctionalObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLInverseObjectPropertiesAxiom;
 import org.semanticweb.owlapi.model.OWLIrreflexiveObjectPropertyAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
+import org.semanticweb.owlapi.model.OWLMetaRuleAxiom;
 import org.semanticweb.owlapi.model.OWLMetamodellingAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLNegativeDataPropertyAssertionAxiom;
@@ -713,6 +714,14 @@ public class OWLEntityCollector implements
 	public Collection<OWLEntity> visit(OWLMetamodellingAxiom axiom) {
 		axiom.getModelClass().accept(this);
 		axiom.getMetamodelIndividual().accept(this);
+		processAxiomAnnotations(axiom);
+		return objects;
+	}
+    
+    @Override
+	public Collection<OWLEntity> visit(OWLMetaRuleAxiom axiom) {
+		axiom.getPropertyR().accept(this);
+		axiom.getPropertyS().accept(this);
 		processAxiomAnnotations(axiom);
 		return objects;
 	}

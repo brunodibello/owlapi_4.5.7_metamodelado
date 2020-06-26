@@ -34,6 +34,7 @@ import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.FUNCTIONAL;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.HAS_KEY;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.METAMODELLING;
+import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.METARULE;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.INDIVIDUAL;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.INVERSE;
 import static org.semanticweb.owlapi.manchestersyntax.parser.ManchesterOWLSyntax.INVERSE_FUNCTIONAL;
@@ -864,7 +865,15 @@ public class ManchesterOWLSyntaxObjectRenderer extends AbstractRenderer
         write(METAMODELLING);
         axiom.getModelClass().accept(this);
         restore();
-
+	}
+    
+    @Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		setAxiomWriting();
+        axiom.getPropertyR().accept(this);
+        write(METARULE);
+        axiom.getPropertyS().accept(this);
+        restore();
 	}
 
     // SWRL

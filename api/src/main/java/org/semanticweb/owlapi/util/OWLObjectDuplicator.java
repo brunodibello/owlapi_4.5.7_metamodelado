@@ -458,7 +458,15 @@ public class OWLObjectDuplicator implements OWLObjectVisitor, SWRLObjectVisitor 
         axiom.getMetamodelIndividual().accept(this);
         OWLIndividual metamodelIndividual = getLastObject();
         obj = dataFactory.getOWLMetamodellingAxiom(modelClass, metamodelIndividual, duplicateAnnotations(axiom));
-
+	}
+    
+    @Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		axiom.getPropertyR().accept(this);
+		OWLObjectPropertyExpression propertyR = getLastObject();
+        axiom.getPropertyS().accept(this);
+        OWLObjectPropertyExpression propertyS = getLastObject();
+        obj = dataFactory.getOWLMetaRuleAxiom(propertyR, propertyS, duplicateAnnotations(axiom));
 	}
 
     @Override

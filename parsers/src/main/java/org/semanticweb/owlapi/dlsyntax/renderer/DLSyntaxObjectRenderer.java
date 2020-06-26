@@ -493,6 +493,15 @@ public class DLSyntaxObjectRenderer extends OWLObjectVisitorAdapter implements O
         writeSpace();
         axiom.getModelClass().accept(this);
 	}
+    
+    @Override
+	public void visit(OWLMetaRuleAxiom axiom) {
+		axiom.getPropertyR().accept(this);
+        writeSpace();
+        write(METARULE);
+        writeSpace();
+        axiom.getPropertyS().accept(this);
+	}
 
     @Override
     public void visit(SWRLRule rule) {
